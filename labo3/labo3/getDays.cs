@@ -10,6 +10,7 @@ using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace labo3
 {
@@ -18,7 +19,7 @@ namespace labo3
         [FunctionName("getDays")]
         public static async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "Days")]HttpRequest req, ILogger log)
         {
-            list<string> days = new list<string>();
+            List<string> days = new List<string>();
             string connectionString = Environment.GetEnvironmentVariable("");
 
             // SqlConnection connection = new SqlConnection();
@@ -42,7 +43,7 @@ namespace labo3
                     }
                 }
             }
-                return OkObjectResult(days());           
+            return new OkObjectResult(days());
         }
     }
 }
